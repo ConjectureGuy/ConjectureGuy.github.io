@@ -1,0 +1,48 @@
+baseURL = 'https://conjectureguy.github.io/'
+languageCode = 'en-us'
+theme = "nightfall"
+publishDir = "docs"
+
+[menu]
+  [[menu.header]]
+    name = "blog"
+    weight = 0
+    url = "blog"
+  [[menu.header]]
+    name = "about"
+    weight = 1
+    url = "about"
+  [[menu.header]]
+    name = "posts"
+    weight = 0
+    url = "/posts"
+
+[params]
+user = "conjectureguy"
+hostname = "github.io"
+  [params.author]
+    name = "Rahul R Katarki"  # Website and RSS feed author
+    email = "katarki.rahul@gmail.com"  # RSS feed email address
+
+
+readingTime = true  # Show reading time on post page
+published = true  # Show published data on post page
+
+[[params.social]]
+key = 0
+name = "github"
+url = "https://github.com/gohugoio"
+target = "_blank"
+aria = "GitHub Profile"
+
+[[params.social]]
+key = 2
+name = "linkedin"
+url = "https://www.example.com"
+aria = "LinkedIn Profile"
+
+[[params.social]]
+key = 3
+name = "email"
+url = "mailto:email@example.com"
+aria = "My e-Mail Address"

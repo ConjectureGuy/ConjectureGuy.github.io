@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>https://conjectureguy.github.io/</link>
+    <description>Recent content on </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <managingEditor>katarki.rahul@gmail.com (Rahul R Katarki)</managingEditor>
+    <webMaster>katarki.rahul@gmail.com (Rahul R Katarki)</webMaster>
+    <lastBuildDate>Wed, 01 Jan 2025 23:04:22 +0530</lastBuildDate>
+    <atom:link href="https://conjectureguy.github.io/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Examplepost</title>
+      <link>https://conjectureguy.github.io/posts/examplepost/</link>
+      <pubDate>Wed, 01 Jan 2025 23:04:22 +0530</pubDate><author>katarki.rahul@gmail.com (Rahul R Katarki)</author>
+      <guid>https://conjectureguy.github.io/posts/examplepost/</guid>
+      <description></description>
+    </item>
+  </channel>
+</rss>
