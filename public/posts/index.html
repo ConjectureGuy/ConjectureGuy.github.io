@@ -48,13 +48,8 @@ Posts | Rahul R Katarki
                 </li>
                 
                 <li>
-                    <a href="https://conjectureguy.github.io/blog/" title="" >
-                        ~/blog</a>
-                </li>
-                
-                <li>
                     <a href="https://conjectureguy.github.io/posts/" title="" >
-                        ~/posts</a>
+                        ~/blog</a>
                 </li>
                 
             </ul>
@@ -77,16 +72,26 @@ Posts | Rahul R Katarki
     <div>
         
 
-        <a class="postListLink" href="https://conjectureguy.github.io/posts/examplepost/">
+        <a class="postListLink" href="https://conjectureguy.github.io/posts/random_numbers/">
             
             <div class="postListItem" role="listitem">
                 <div class="postHeader">
-                    <span class="postTitle">Examplepost</span>
+                    <span class="postTitle">Random Numbers: Are they truly random?</span>
                     
-                    <time class="postDate" datetime="2025-01-01">January 1, 2025</time>
+                    <time class="postDate" datetime="2025-01-02">January 2, 2025</time>
                 </div>
                 <div class="postExcerpt">
-                    <p></p>
+                    <p><p>Imagine you are at a lottery shop and have to buy 1 ticket. The owner of the shop randomly picks a number between 1 to 1000 and the person with that ticket wins the lottery. Suppose he uses this following code to pick the random number.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#a6e22e">rand</span>()<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, x);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You are at luck since we can “predict” that the code will always return 384. Continue reading the article to know why this happens.</p></p>
                 </div>
             </div>
         </a>

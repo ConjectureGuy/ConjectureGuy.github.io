@@ -4,15 +4,11 @@ theme = "nightfall"
 
 [menu]
   [[menu.header]]
-    name = "blog"
-    weight = 0
-    url = "blog/"
-  [[menu.header]]
     name = "about"
     weight = 1
     url = "about/"
   [[menu.header]]
-    name = "posts"
+    name = "blog"
     weight = 0
     url = "posts/"
 
@@ -25,8 +21,8 @@ hostname = "github.io"
     email = "katarki.rahul@gmail.com"  # RSS feed email address
 
 
-readingTime = true  # Show reading time on post page
-published = true  # Show published data on post page
+readingTime = false  # Show reading time on post page
+published = false  # Show published data on post page
 
 [[params.social]]
 key = 0
@@ -37,12 +33,18 @@ aria = "GitHub Profile"
 
 [[params.social]]
 key = 2
-name = "lma0"
-url = "https://www.example.com"
-aria = "LinkedIn Profile"
+name = "codeforces"
+url = "https://codeforces.com/profile/conjectureguy"
+aria = "Codeforces Profile"
+
+[[params.social]]
+key = 2
+name = "linkedin"
+url = "https://www.linkedin.com/in/rahulrkatarki/"
+aria = "Codeforces Profile"
 
 [[params.social]]
 key = 3
 name = "email"
-url = "mailto:email@example.com"
+url = "mailto:katarki.rahul@gmail.com"
 aria = "My e-Mail Address"

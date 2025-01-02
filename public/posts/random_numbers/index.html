@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <title>
+Random Numbers: Are they truly random? | Rahul R Katarki
+</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="">
+
+<meta name="generator" content="Hugo 0.140.2">
+
+
+<link rel="canonical" href="https://conjectureguy.github.io/posts/random_numbers/" >
+
+
+
+
+<link href="/css/style.min.36c061153203db94fc1169914d07c49c3a537a11316e9ffbd4c7a511df482d8d.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+
+    <div class="flexWrapper">
+        <header class="headerWrapper">
+    <div class="header">
+        <div>
+            <a class="terminal" href="https://conjectureguy.github.io/">
+                <span>conjectureguy@github.io ~ $</span>
+            </a>
+        </div>
+        <input class="side-menu" type="checkbox" id="side-menu">
+        <label class="hamb" for="side-menu"><span class="hamb-line"></span></label>
+        <nav class="headerLinks">
+            <ul>
+                
+                <li>
+                    <a href="https://conjectureguy.github.io/about/" title="" >
+                        ~/about</a>
+                </li>
+                
+                <li>
+                    <a href="https://conjectureguy.github.io/posts/" title="" >
+                        ~/blog</a>
+                </li>
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="content">
+            <main class="main">
+                
+<div class="postWrapper">
+    <h1>Random Numbers: Are they truly random?</h1>
+    
+    
+    <section class="postMetadata">
+        <dl>
+            
+            
+            
+            
+                <dt>published</dt>
+                
+                <dd><time datetime="2025-01-02">January 2, 2025</time></dd>
+            
+            
+                <dt>reading time</dt>
+                <dd>7 minutes</dd>
+            
+        </dl>
+    </section>
+    
+    <div>
+        <p>Imagine you are at a lottery shop and have to buy 1 ticket. The owner of the shop randomly picks a number between 1 to 1000 and the person with that ticket wins the lottery. Suppose he uses this following code to pick the random number.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#a6e22e">rand</span>()<span style="color:#f92672">%</span><span style="color:#ae81ff">1000</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>, x);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>; 
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You are at luck since we can “predict” that the code will always return 384. Continue reading the article to know why this happens.</p>
+<h3 id="what-are-random-numbers-and-why-do-we-care-about-them">What are random numbers and why do we care about them?</h3>
+<p>Random numbers are numbers that are generated in a way that they cannot be predicted and follow no pattern. Each number has an equal probability of being chosen.</p>
+<p>In the world of cryptography, random numbers are fundamental in generating encryption keys and securing communication. If the random numbers used in cryptographic systems aren’t truly random or unpredictable, the entire system becomes vulnerable to attacks.</p>
+<h3 id="how-to-generate-them">How to generate them?</h3>
+<p>There are mainly 2 types of random number generators(RNGs):</p>
+<ul>
+<li>
+<p>Pseudo Random Number Generator (PRNG)</p>
+</li>
+<li>
+<p>True Random Number Generator (TRNG)</p>
+</li>
+</ul>
+<h3 id="pseudo-random-number-generators">Pseudo Random Number Generators</h3>
+<p>These are numbers that appear random but are generated by deterministic processes, usually algorithms. They are called pseudorandom because, while they can mimic randomness, they are based on an initial seed value, and the sequence can be reproduced if the seed is known. This is widely used because true randomness is hard to achieve purely using code.</p>
+<p>Seed value is a number which uniquely characterizes the sequence of random numbers. We can use the seed value to get back the sequence thus enabling us to predict future random numbers.</p>
+<p>Examples for PRNGs include LCG, Mersenne Twister, Xorshift, and Middle Square Method. Let’s look into LCG:</p>
+<h3 id="linear-congruence-generator-lcg">Linear Congruence Generator (LCG)</h3>
+<p>It is one of the oldest and simplest PRNG algorithms. It is based on the following recurrence relation:</p>
+<p>$$X_{n+1} = (aX_n + c)\mod m$$</p>
+<p>Where:</p>
+<p>$$X_n \text{ is the current number}$$</p>
+<p>$$X_{n+1} \text{ is the next number}$$</p>
+<p>$$a \text{ is the multiplier constant}$$</p>
+<p>$$c \text{ is the increment constant}$$</p>
+<p>$$m \text{ is the prime modulus}$$</p>
+<p>This recurrence generates numbers in the interval <code>0</code> to <code>m-1</code>. We start off by choosing the first number of the sequence which is the seed and get the subsequent numbers by the recurrence.</p>
+<p>For example:</p>
+<p>Let:</p>
+<p>$$X_1 = 11 \text{, } a = 3\text{, } c = 13 \text{ and } m = 67$$</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> seed <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">13</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">67</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">LCG_next_number</span>(<span style="color:#66d9ef">int</span> current_number){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> next_number <span style="color:#f92672">=</span> (a<span style="color:#f92672">*</span>current_number <span style="color:#f92672">+</span> c)<span style="color:#f92672">%</span>m;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> next_number;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> current_number <span style="color:#f92672">=</span> seed;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> length <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> length; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d, &#34;</span>, current_number);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> next_number <span style="color:#f92672">=</span> <span style="color:#a6e22e">LCG_next_number</span>(current_number);
+</span></span><span style="display:flex;"><span>        current_number <span style="color:#f92672">=</span> next_number;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The first 10 numbers are: <code>11, 46, 17, 64, 4, 25, 21, 9, 40, 66</code></p>
+<p>There are a few issues with this type of generation:</p>
+<ul>
+<li>
+<p><strong>Periodicity</strong>:</p>
+<p>Let’s look at the first 50 terms of this sequence:</p>
+<p><code>11, 46, 17, 64, 4, 25, 21, 9, 40, 66, 10, 43, 8, 37, 57, 50, 29, 33, 45, 14, 55, 44, 11, 46, 17, 64, 4, 25, 21, 9, 40, 66, 10, 43, 8, 37, 57, 50, 29, 33, 45, 14, 55, 44, 11, 46, 17, 64, 4, 25</code></p>
+<p>We can notice the numbers repeat after a certain point, i.e after the 22nd number, we repeat <code>11, 46, 17, 64, 4, 25, 21, 9, 40, 66, 10, 43, 8, 37, 57, 50, 29, 33, 45, 14, 55, 44</code> forever. This is clearly bad for a RNG.</p>
+<p>The period is the number of values generated before the sequence starts repeating. The maximum period of an LCG is <code>m</code>, but in practice, the actual period is usually much shorter depending on the choice of parameters <code>a</code>, <code>c</code>, and <code>m</code>.</p>
+</li>
+<li>
+<p><strong>Some numbers never appear</strong>:</p>
+<p>For the above parameters let’s count the frequency of numbers in the first 1000 numbers.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdio.h&gt; </span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;stdlib.h&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> seed <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#ae81ff">13</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> <span style="color:#ae81ff">67</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">LCG_next_number</span>(<span style="color:#66d9ef">int</span> current_number){
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> next_number <span style="color:#f92672">=</span> (a<span style="color:#f92672">*</span>current_number <span style="color:#f92672">+</span> c)<span style="color:#f92672">%</span>m;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> next_number;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> frequency[m];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() 
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> current_number <span style="color:#f92672">=</span> seed;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> length <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> length; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        frequency[current_number]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> next_number <span style="color:#f92672">=</span> <span style="color:#a6e22e">LCG_next_number</span>(current_number);
+</span></span><span style="display:flex;"><span>        current_number <span style="color:#f92672">=</span> next_number;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;%d, &#34;</span>, frequency[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">printf</span>(<span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>We get:</p>
+<p><code>0, 0, 0, 0, 46, 0, 0, 0, 45, 46, 45, 46, 0, 0, 45, 0, 0, 46, 0, 0, 0, 46, 0, 0, 0, 46, 0, 0, 0, 45, 0, 0, 0, 45, 0, 0, 0, 45, 0, 0, 46, 0, 0, 45, 45, 45, 46, 0, 0, 0, 45, 0, 0, 0, 0, 45, 0, 45, 0, 0, 0, 0, 0, 0, 46, 0, 46</code></p>
+<p>We notice a bunch of zeros which means in the first 1000 numbers we never get those numbers. The frequency count of these numbers will always be zero since the sequence in periodic in nature. Ideally, the frequency distribution should look something like this:</p>
+<p><code>11, 18, 11, 15, 16, 18, 20, 16, 10, 11, 15, 17, 11, 15, 12, 16, 14, 17, 19, 21, 18, 10, 17, 10, 13, 11, 11, 14, 19, 23, 14, 17, 11, 13, 12, 14, 16, 7, 11, 13, 17, 18, 14, 13, 4, 16, 15, 16, 12, 16, 18, 17, 12, 13, 20, 19, 20, 15, 18, 16, 15, 13, 24, 13, 19, 12, 18</code></p>
+<p>Each number should have a frequency count of around 1000/67 ≈ 15 since each number has an equal likelihood of being chosen.</p>
+</li>
+</ul>
+<p><strong>Predictable</strong>:</p>
+<p>If we have the parameters <code>a</code>, <code>c</code> and <code>m</code>, we can predict the next number. But what if we know <code>m</code>, and 3 consecutive terms of the sequence? We can solve for the parameters <code>a</code> and <code>c</code> in this case. Consider the sequence discussed above:</p>
+<p>Assume we have the first 3 terms: <code>11, 46 and 17</code> and <code>m = 67</code> . Thus:</p>
+<p>$$46 = (11a + c)\mod 67$$</p>
+<p>$$17 = (46a + c) \mod 67$$</p>
+<p>Let’s forget about modulo operation for some time. This would change our equations to linear equation in 2 variables. Solving them we get:</p>
+<p>$$a = \frac{-29}{35} \text{ and } c = \frac{1929}{35}$$</p>
+<p>Now bringing in the modulo part by taking the modular inverse of denominator:</p>
+<p>$$a = -29 \times 35^{-1} \mod 67 = 3$$</p>
+<p>$$c = 1929 \times 35^{-1} \mod 67 = 13$$</p>
+<p>Upon solving we get <code>a = 3</code> and <code>c = 13</code> which are precisely the parameters we chose to begin with. Python code for the same:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">lcg_solver</span>(x_1, x_2, x_3, m):
+</span></span><span style="display:flex;"><span>    n1 <span style="color:#f92672">=</span> x_2 <span style="color:#f92672">-</span> x_3
+</span></span><span style="display:flex;"><span>    d1 <span style="color:#f92672">=</span> x_1<span style="color:#f92672">-</span>x_2
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">=</span> n1<span style="color:#f92672">*</span>pow(d1, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, m)
+</span></span><span style="display:flex;"><span>    a <span style="color:#f92672">=</span> a<span style="color:#f92672">%</span>m
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> x_2 <span style="color:#f92672">-</span> x_1<span style="color:#f92672">*</span>a
+</span></span><span style="display:flex;"><span>    c <span style="color:#f92672">=</span> c<span style="color:#f92672">%</span>m
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a, c
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    x_1 <span style="color:#f92672">=</span> <span style="color:#ae81ff">11</span>
+</span></span><span style="display:flex;"><span>    x_2 <span style="color:#f92672">=</span> <span style="color:#ae81ff">46</span>
+</span></span><span style="display:flex;"><span>    x_3 <span style="color:#f92672">=</span> <span style="color:#ae81ff">17</span>
+</span></span><span style="display:flex;"><span>    m <span style="color:#f92672">=</span> <span style="color:#ae81ff">67</span>
+</span></span><span style="display:flex;"><span>    a, c <span style="color:#f92672">=</span> lcg_solver(x_1, x_2, x_3, m)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">&#34;a = </span><span style="color:#e6db74">{}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">c = </span><span style="color:#e6db74">{}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span><span style="color:#f92672">.</span>format(a, c))
+</span></span></code></pre></div><p>Thus LCG is not a good PRNG. C uses LCG to as it’s random number generator. At the start of the article we saw we always got the same number generated. This is because C sets the seed to 1 by default if not initialized. You can use <code>srand(time(0))</code> to get a random seed. But be careful since this may too give predictable results. In Python, we can use the <code>Crypto.Random</code> package to generate cryptographically secure random numbers. Mersenne Twister is a good choice for PRNG as it has an extremely long period and produces good random numbers. It works by maintaining an internal state that consists of 624 32-bit integers (19,937 bits total). These values are updated through a series of bitwise operations and modular arithmetic to produce the next random number in the sequence.</p>
+<h3 id="true-random-number-generator">True Random Number Generator</h3>
+<p>A true random number generator (TRNG) uses a nondeterministic source to make randomness. It relies on capturing random events from physical processes that are fundamentally unpredictable such as thermal noise, human input like keystrokes or mouse movements, atmospheric noise, etc. These are suitable for cryptographic use as the entropy in these numbers is high.</p>
+
+    </div>
+</div>
+
+            </main>
+        </div>
+
+
+        <footer class="footer">
+    
+        <span>
+            © 2025 Rahul R Katarki, Built with
+            <a href="https://gohugo.io" class="footerLink">Hugo</a> and
+            <a href="https://github.com/LordMathis/hugo-theme-nightfall" class="footerLink">Nightfall</a> theme
+        </span>
+    
+</footer>
+    </div>
+
+</body>
+
+</html>
