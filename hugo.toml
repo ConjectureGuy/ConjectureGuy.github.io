@@ -7,15 +7,15 @@ publishDir = "docs"
   [[menu.header]]
     name = "blog"
     weight = 0
-    url = "/blog/"
+    url = "blog/"
   [[menu.header]]
     name = "about"
     weight = 1
-    url = "/about/"
+    url = "about/"
   [[menu.header]]
     name = "posts"
     weight = 0
-    url = "/posts/"
+    url = "posts/"
 
 
 [params]
