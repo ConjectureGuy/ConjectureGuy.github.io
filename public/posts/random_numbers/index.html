@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-<head>
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
     <title>
 Random Numbers: Are they truly random? | Rahul R Katarki
 </title>
@@ -13,7 +13,7 @@ Random Numbers: Are they truly random? | Rahul R Katarki
 <meta name="generator" content="Hugo 0.140.2">
 
 
-<link rel="canonical" href="https://conjectureguy.github.io/posts/random_numbers/" >
+<link rel="canonical" href="http://localhost:1313/posts/random_numbers/" >
 
 
 
@@ -31,7 +31,7 @@ Random Numbers: Are they truly random? | Rahul R Katarki
         <header class="headerWrapper">
     <div class="header">
         <div>
-            <a class="terminal" href="https://conjectureguy.github.io/">
+            <a class="terminal" href="http://localhost:1313/">
                 <span>conjectureguy@github.io ~ $</span>
             </a>
         </div>
@@ -41,18 +41,41 @@ Random Numbers: Are they truly random? | Rahul R Katarki
             <ul>
                 
                 <li>
-                    <a href="https://conjectureguy.github.io/about/" title="" >
+                    <a href="http://localhost:1313/about/" title="" >
                         ~/about</a>
                 </li>
                 
                 <li>
-                    <a href="https://conjectureguy.github.io/posts/" title="" >
+                    <a href="http://localhost:1313/posts/" title="" >
                         ~/blog</a>
                 </li>
                 
             </ul>
         </nav>
     </div>
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$','$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+  
+    window.addEventListener('load', (event) => {
+        document.querySelectorAll("mjx-container").forEach(function(x){
+          x.parentElement.classList += 'has-jax'})
+      });
+  
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script type="text/javascript" id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  
 </header>
 
 
@@ -62,23 +85,6 @@ Random Numbers: Are they truly random? | Rahul R Katarki
 <div class="postWrapper">
     <h1>Random Numbers: Are they truly random?</h1>
     
-    
-    <section class="postMetadata">
-        <dl>
-            
-            
-            
-            
-                <dt>published</dt>
-                
-                <dd><time datetime="2025-01-02">January 2, 2025</time></dd>
-            
-            
-                <dt>reading time</dt>
-                <dd>7 minutes</dd>
-            
-        </dl>
-    </section>
     
     <div>
         <p>Imagine you are at a lottery shop and have to buy 1 ticket. The owner of the shop randomly picks a number between 1 to 1000 and the person with that ticket wins the lottery. Suppose he uses this following code to pick the random number.</p>

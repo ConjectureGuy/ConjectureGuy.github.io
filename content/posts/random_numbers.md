@@ -2,6 +2,8 @@
 date = '2025-01-02T13:12:33+05:30'
 draft = false
 title = 'Random Numbers: Are they truly random?'
+mathjax = true
+showMetadata = false
 +++
 
 Imagine you are at a lottery shop and have to buy 1 ticket. The owner of the shop randomly picks a number between 1 to 1000 and the person with that ticket wins the lottery. Suppose he uses this following code to pick the random number.
